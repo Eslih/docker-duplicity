@@ -130,3 +130,9 @@ FROM postgres AS postgres-s3
 ENV JOB_500_WHAT='dup full $SRC $DST' \
     JOB_500_WHEN='weekly' \
     OPTIONS_EXTRA='--metadata-sync-mode partial --full-if-older-than 1W --file-prefix-archive archive-$(hostname -f)- --file-prefix-manifest manifest-$(hostname -f)- --file-prefix-signature signature-$(hostname -f)- --s3-european-buckets --s3-multipart-chunk-size 10 --s3-use-new-style'
+
+FROM docker as docker-postgres
+RUN apk add --no-cache postgresql --repository http://dl-cdn.alpinelinux.org/alpine/edge/main
+ENV JOB_200_WHAT psql -0Atd postgres -c \"SELECT datname FROM pg_database WHERE NOT datistemplate AND datname != \'postgres\'\" | xargs -0tI DB pg_dump --dbname DB --no-owner --no-privileges --file \"\$SRC/DB.sql\"
+ENV JOB_200_WHEN='daily weekly' \
+    PGHOST=db
