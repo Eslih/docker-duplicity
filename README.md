@@ -178,7 +178,7 @@ Add jobs through environment variable pairs. The order will be followed.
 Refer to [Duplicity man page](http://duplicity.nongnu.org/duplicity.1.html), or
 execute:
 
-    docker run -it --rm tecnativa/duplicity duplicity --help
+    docker run -it --rm eslih/duplicity duplicity --help
 
 ### Shortcuts
 
@@ -233,7 +233,7 @@ services:
             POSTGRES_USER: myuser
             POSTGRES_DB: mydb
     backup:
-        image: tecnativa/duplicity:postgres
+        image: eslih/duplicity:postgres
         hostname: my.postgres.backup
         environment:
             # Postgres connection
