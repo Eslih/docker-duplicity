@@ -22,9 +22,6 @@ ENV CRONTAB_15MIN='*/15 * * * *' \
     SMTP_USER='' \
     SRC='/mnt/lv-mirror-docker'
 
-#ENTRYPOINT [ "/usr/local/bin/entrypoint" ]
-CMD ["/usr/sbin/crond", "-fd8"]
-
 # Link the job runner in all periodicities available
 RUN ln -s /usr/local/bin/jobrunner /etc/periodic/15min/jobrunner
 RUN ln -s /usr/local/bin/jobrunner /etc/periodic/hourly/jobrunner
@@ -103,6 +100,9 @@ LABEL org.label-schema.schema-version="1.0" \
       org.label-schema.build-date="$BUILD_DATE" \
       org.label-schema.vcs-ref="$VCS_REF" \
       org.label-schema.vcs-url="https://github.com/eslih/docker-duplicity"
+
+#ENTRYPOINT [ "/usr/local/bin/entrypoint" ]
+CMD ["/usr/sbin/crond", "-fd8"]
 
 
 FROM latest AS s3
