@@ -20,7 +20,7 @@ ENV CRONTAB_15MIN='*/15 * * * *' \
     SMTP_PORT='25' \
     SMTP_TLS='' \
     SMTP_USER='' \
-    SRC='/mnt/lv-mirror-docker'
+    SRC='/mnt/backup/src'
 
 # Link the job runner in all periodicities available
 RUN ln -s /usr/local/bin/jobrunner /etc/periodic/15min/jobrunner

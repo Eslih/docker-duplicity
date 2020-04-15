@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  backup:
+    image: eslih/duplicity:docker-postgres
+    hostname: cloudhub.backup
+    environment:
+      # Postgres connection
+      - PGHOST=${NEXTCLOUD_DB_HOST}  # This is the default
+      - PGPASSWORD=${NEXTCLOUD_DB_PASS}
+      - PGUSER=${NEXTCLOUD_DB_USER}
+
+      # Volumes
+      # Nextcloud:
+        # nextcloud_nextcloud
+        # nextcloud_data
+      # Traefik:
+        # letsencrypt
+      # PiHole:
+        # etc-pihole
+        # etc-dnsmasq
+
+      # Additional configurations for Duplicity
+      - DST=/mnt/lv-docker-backup/test
+#      - OPTIONS=--s3-european-buckets --s3-use-new-style
+      - PASSPHRASE="example backkup encryption secret"
